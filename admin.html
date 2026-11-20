@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - QYUYA STORE</title>
+
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <main class="admin-container">
+        <header class="admin-header">
+            <h1>⚡ QYUYA STORE</h1>
+            <p>ADMIN CONTROL PANEL</p>
+        </header>
+
+        <!-- LOGIN -->
+        <section class="admin-card" id="loginSection">
+            <h2>Login Admin</h2>
+            <p>Masuk untuk mengatur harga Robux.</p>
+
+            <form id="loginForm">
+                <label>Email Admin</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email admin"
+                    required
+                >
+
+                <label>Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Password admin"
+                    required
+                >
+
+                <button type="submit" id="loginButton">
+                    LOGIN
+                </button>
+            </form>
+
+            <p class="message" id="loginMessage"></p>
+        </section>
+
+       
+<!-- DASHBOARD -->
+<section class="admin-card hidden" id="dashboardSection">
+    <div class="dashboard-top">
+        <div>
+            <h2>Pengaturan Rate</h2>
+            <p>Atur harga Robux toko.</p>
+        </div>
+
+        <button class="logout-button" id="logoutButton">
+            Logout
+        </button>
+    </div>
+
+    <div class="rate-info">
+        <span>Rate custom di bawah 100 Robux</span>
+        <strong id="currentRateUnder">Memuat...</strong>
+    </div>
+
+    <div class="rate-info">
+        <span>Rate 100 Robux ke atas</span>
+        <strong id="currentRatePlus">Memuat...</strong>
+    </div>
+
+    <form id="rateForm">
+        <label>Rate custom di bawah 100 Robux</label>
+        <input
+            type="number"
+            id="newRateUnder"
+            min="1"
+            step="1"
+            placeholder="Contoh: 155"
+            required
+        >
+
+        <label>Rate 100 Robux ke atas</label>
+        <input
+            type="number"
+            id="newRatePlus"
+            min="1"
+            step="1"
+            placeholder="Contoh: 147"
+            required
+        >
+
+        <button type="submit" id="saveButton">
+            SIMPAN RATE
+        </button>
+    </form>
+
+    <p class="message" id="rateMessage"></p>
+
+    <p class="note">
+        Perubahan rate akan digunakan oleh website pembeli.
+    </p>
+</section>
+
+
+        <footer>
+            © <span id="year"></span> QYUYA STORE
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/admin.js"></script>
+
+</body>
+</html>
