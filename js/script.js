@@ -326,7 +326,7 @@ orderButton.addEventListener("click", async () => {
     const message = `
 Halo QYUYA STORE!
 
-Username Roblox: ${username}
+Username: ${username}
 Jumlah: ${amount.toLocaleString("id-ID")} Robux
 Pembayaran: ${selectedPayment}
 Total: ${formatRupiah(total)}
