@@ -1,6 +1,6 @@
 const CONFIG = {
     whatsappAdmin: "628133240038",
-    supabaseUrl: "https://ggdxwhmbgooectnyaupd.supabase.co/rest/v1/",
+    supabaseUrl: "https://ggdxwhmbgooectnyaupd.supabase.co",
     supabaseKey: "sb_publishable_3LWFvT7yapbgynPUZxmRMg_TxyHtSdg"
 };
 
