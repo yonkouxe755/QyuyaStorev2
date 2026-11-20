@@ -326,15 +326,11 @@ orderButton.addEventListener("click", async () => {
     const message = `
 Halo QYUYA STORE!
 
-Saya ingin memesan Robux.
-
 Username Roblox: ${username}
 Jumlah: ${amount.toLocaleString("id-ID")} Robux
-Rate: Rp${rate}
 Pembayaran: ${selectedPayment}
 Total: ${formatRupiah(total)}
 
-Mohon diproses. Terima kasih!
     `.trim();
 
     const whatsappUrl =
