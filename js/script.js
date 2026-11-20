@@ -1,8 +1,7 @@
-
 const CONFIG = {
     whatsappAdmin: "628133240038",
     supabaseUrl: "https://ggdxwhmbgooectnyaupd.supabase.co",
-    supabaseKey: "sb_publishable_3LWFvT7yapbgynPUZxmRMg_TxyHtSdg"
+    supabaseKey: "sb_publishable_3LWFv7T7yapbgynPUZxmRMg_TxyHtSdg"
 };
 
 const supabaseClient = window.supabase.createClient(
@@ -20,6 +19,8 @@ let selectedPayment = "QRIS";
 
 const productGrid = document.getElementById("productGrid");
 const customRobuxInput = document.getElementById("customRobux");
+const robloxUsernameInput = document.getElementById("robloxUsername");
+
 const qrisBox = document.getElementById("qrisBox");
 const danaBox = document.getElementById("danaBox");
 const seaBankBox = document.getElementById("seaBankBox");
@@ -149,6 +150,14 @@ customRobuxInput.addEventListener("input", () => {
 });
 
 // ======================================
+// USERNAME ROBLOX
+// ======================================
+
+robloxUsernameInput.addEventListener("input", () => {
+    updateSummary();
+});
+
+// ======================================
 // POP-UP PEMBAYARAN
 // ======================================
 
@@ -250,9 +259,13 @@ document.querySelectorAll(".copy-button").forEach(button => {
 function updateSummary() {
     const summaryProduct = document.getElementById("summaryProduct");
     const summaryPayment = document.getElementById("summaryPayment");
+    const summaryUsername = document.getElementById("summaryUsername");
     const totalPrice = document.getElementById("totalPrice");
 
     const amount = getSelectedAmount();
+    const username = robloxUsernameInput.value.trim();
+
+    summaryUsername.textContent = username || "Belum diisi";
 
     summaryProduct.textContent = amount
         ? amount.toLocaleString("id-ID") + " Robux"
@@ -275,7 +288,22 @@ function updateSummary() {
 
 orderButton.addEventListener("click", async () => {
     const amount = getSelectedAmount();
+    const username = robloxUsernameInput.value.trim();
 
+    // Validasi username
+    if (!username) {
+        alert("Silakan masukkan Username Roblox terlebih dahulu!");
+        robloxUsernameInput.focus();
+        return;
+    }
+
+    if (!/^[A-Za-z0-9_]{3,20}$/.test(username)) {
+        alert("Username Roblox harus 3-20 karakter dan hanya boleh berisi huruf, angka, atau underscore (_).");
+        robloxUsernameInput.focus();
+        return;
+    }
+
+    // Validasi jumlah Robux
     if (!amount || !Number.isInteger(amount) || amount < 1) {
         alert("Silakan pilih atau masukkan jumlah Robux!");
         return;
@@ -300,10 +328,13 @@ Halo QYUYA STORE!
 
 Saya ingin memesan Robux.
 
+Username Roblox: ${username}
 Jumlah: ${amount.toLocaleString("id-ID")} Robux
+Rate: Rp${rate}
 Pembayaran: ${selectedPayment}
 Total: ${formatRupiah(total)}
 
+Mohon diproses. Terima kasih!
     `.trim();
 
     const whatsappUrl =
@@ -323,6 +354,7 @@ Total: ${formatRupiah(total)}
         const { error } = await supabaseClient
             .from("orders")
             .insert({
+                roblox_username: username,
                 robux_amount: amount,
                 rate: rate,
                 total_price: total,
